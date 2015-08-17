@@ -8,6 +8,14 @@
 
 #import "LocationAppDelegate.h"
 
+#import "LocationManager.h"
+
+@interface LocationAppDelegate ()
+
+
+
+@end
+
 @implementation LocationAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -35,28 +43,23 @@
         [alert show];
         
     } else{
-        
-        self.locationTracker = [[LocationTracker alloc]init];
-        [self.locationTracker startLocationTracking];
+        [[LocationManager sharedManager] startLocationTracking];
         
         //Send the best location to server every 60 seconds
         //You may adjust the time interval depends on the need of your app.
-        NSTimeInterval time = 60.0;
-        self.locationUpdateTimer =
-        [NSTimer scheduledTimerWithTimeInterval:time
-                                         target:self
-                                       selector:@selector(updateLocation)
-                                       userInfo:nil
-                                        repeats:YES];
+
+        self.locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f
+                                                                    target:self
+                                                                  selector:@selector(postLocation)
+                                                                  userInfo:nil
+                                                                   repeats:YES];
     }
     
     return YES;
 }
 
--(void)updateLocation {
-    NSLog(@"updateLocation");
-    
-    [self.locationTracker updateLocationToServer];
+-(void)postLocation {
+    [[LocationManager sharedManager] postCurrentLocation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
