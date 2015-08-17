@@ -10,9 +10,13 @@
 
 #import "LocationManager.h"
 
+@import Firebase;
+
+
 @interface LocationAppDelegate ()
 
-
+@property (nonatomic, strong) NSTimer *locationUpdateTimer;
+@property (nonatomic, strong) Firebase *firebase;
 
 @end
 
@@ -20,8 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-     UIAlertView * alert;
+    UIAlertView * alert;
     
     //We have to make sure that the Background App Refresh is enable for the Location updates to work in the background.
     if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
@@ -59,7 +62,13 @@
 }
 
 -(void)postLocation {
-    [[LocationManager sharedManager] postCurrentLocation];
+    [[LocationManager sharedManager] uploadCurrentLocation:^(CLLocation *location) {
+        NSDictionary *json = @{@"lat" : [NSString stringWithFormat:@"%f", location.coordinate.latitude],
+                               @"long" : [NSString stringWithFormat:@"%f", location.coordinate.longitude]};
+        
+        Firebase *timestamp = [self.firebase childByAppendingPath:[NSDate date].description];
+        [timestamp setValue:json];
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

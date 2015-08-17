@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@import CoreLocation.CLLocation;
+
 @interface LocationManager : NSObject
 
 + (instancetype)sharedManager;
 
 - (void)startLocationTracking;
-- (void)postCurrentLocation;
+- (void)uploadCurrentLocation:(void (^)(CLLocation *location))uploadBlock;
 
 @end

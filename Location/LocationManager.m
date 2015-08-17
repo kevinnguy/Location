@@ -9,7 +9,6 @@
 #import "LocationManager.h"
 
 @import CoreLocation;
-@import Firebase;
 
 @interface LocationManager () <CLLocationManagerDelegate>
 
@@ -19,15 +18,17 @@
 @property (nonatomic, strong) CLLocation *lastLocation;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *restartLocationUpdateTimer;
+@property (nonatomic, strong) NSTimer *uploadLocationTimer;
 //@property (nonatomic, strong) NSTimer *delayTimer;
 
 @property (nonatomic, strong) NSMutableArray *backgroundTaskArray;
 @property (nonatomic) UIBackgroundTaskIdentifier masterTask;
 
-@property (nonatomic, strong) Firebase *firebase;
 
 @end
+
+NSTimeInterval const kLocationManagerTimerInterval = 60.0f;
 
 @implementation LocationManager
 
@@ -60,12 +61,17 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
+    self.uploadLocationTimer = [NSTimer scheduledTimerWithTimeInterval:kLocationManagerTimerInterval
+                                                                target:self
+                                                              selector:@selector(uploadLocationTimer)
+                                                              userInfo:nil
+                                                               repeats:YES];
 
     return self;
 }
 
 #pragma mark - Post update to server
-- (void)postCurrentLocation {
+- (void)uploadCurrentLocation:(void (^)(CLLocation *))uploadBlock {
     // Find the best location from the array based on accuracy
     CLLocation *bestLocation = self.locationArray.firstObject;
     for (NSInteger i = 1; i < self.locationArray.count; i++){
@@ -85,12 +91,9 @@
     }
     
     // Post location to server
-    NSLog(@"Best location: %@", self.currentLocation.description);
-    NSDictionary *json = @{@"lat" : [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude],
-                           @"long" : [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude]};
-
-
-    
+    NSLog(@"Best current location: %@", self.currentLocation.description);
+    uploadBlock(self.currentLocation);
+        
     // Clear unused locations
     [self.locationArray removeAllObjects];
 }
@@ -125,9 +128,9 @@
 - (void)restartLocationUpdates {
     NSLog(@"restartLocationUpdates");
     
-    if (self.timer) {
-        [self.timer invalidate];
-        self.timer = nil;
+    if (self.restartLocationUpdateTimer) {
+        [self.restartLocationUpdateTimer invalidate];
+        self.restartLocationUpdateTimer = nil;
     }
     
     [self updateLocation];
@@ -218,14 +221,14 @@
     }
     
     // If the timer still valid, return it (Will not run the code below)
-    if (self.timer) {
+    if (self.restartLocationUpdateTimer) {
         return;
     }
     
     [self beginNewBackgroundTask];
     
-    // Restart the locationMaanger after 1 minute
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:60
+    // Restart the location maanger after 1 minute
+    self.restartLocationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:kLocationManagerTimerInterval
                                                   target:self
                                                 selector:@selector(restartLocationUpdates)
                                                 userInfo:nil

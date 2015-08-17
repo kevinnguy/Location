@@ -10,7 +10,4 @@
 
 @interface LocationAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (nonatomic) NSTimer* locationUpdateTimer;
-
 @end
