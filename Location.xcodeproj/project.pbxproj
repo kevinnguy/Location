@@ -22,9 +22,6 @@
 		5C9090B118B3A66A00510153 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C90909318B3A66A00510153 /* UIKit.framework */; };
 		5C9090B918B3A66A00510153 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C9090B718B3A66A00510153 /* InfoPlist.strings */; };
 		5C9090BB18B3A66A00510153 /* LocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9090BA18B3A66A00510153 /* LocationTests.m */; };
-		5C9090C618B3A75500510153 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9090C518B3A75400510153 /* LocationTracker.m */; };
-		5C9090C918B3A78800510153 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9090C818B3A78800510153 /* LocationShareModel.m */; };
-		5C9090CC18B3A7FC00510153 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9090CB18B3A7FC00510153 /* BackgroundTaskManager.m */; };
 		5C9090CE18B3AB2100510153 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9090CD18B3AB2100510153 /* CoreLocation.framework */; };
 		737FBBBA31174B5D53AE9945 /* libPods-Location.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9731A57F370CE3AFAB497C /* libPods-Location.a */; };
 /* End PBXBuildFile section */
@@ -64,12 +61,6 @@
 		5C9090B618B3A66A00510153 /* LocationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LocationTests-Info.plist"; sourceTree = "<group>"; };
 		5C9090B818B3A66A00510153 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C9090BA18B3A66A00510153 /* LocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationTests.m; sourceTree = "<group>"; };
-		5C9090C418B3A75400510153 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
-		5C9090C518B3A75400510153 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
-		5C9090C718B3A78800510153 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
-		5C9090C818B3A78800510153 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
-		5C9090CA18B3A7FC00510153 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
-		5C9090CB18B3A7FC00510153 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
 		5C9090CD18B3AB2100510153 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -140,12 +131,6 @@
 				5C9090A118B3A66A00510153 /* Main.storyboard */,
 				5C9090A418B3A66A00510153 /* LocationViewController.h */,
 				5C9090A518B3A66A00510153 /* LocationViewController.m */,
-				5C9090C418B3A75400510153 /* LocationTracker.h */,
-				5C9090C518B3A75400510153 /* LocationTracker.m */,
-				5C9090CA18B3A7FC00510153 /* BackgroundTaskManager.h */,
-				5C9090CB18B3A7FC00510153 /* BackgroundTaskManager.m */,
-				5C9090C718B3A78800510153 /* LocationShareModel.h */,
-				5C9090C818B3A78800510153 /* LocationShareModel.m */,
 				0A3694F31B82423A004D46FD /* LocationManager.h */,
 				0A3694F41B82423A004D46FD /* LocationManager.m */,
 				5C9090A718B3A66A00510153 /* Images.xcassets */,
@@ -334,10 +319,7 @@
 			files = (
 				5C90909C18B3A66A00510153 /* main.m in Sources */,
 				0A3694F51B82423A004D46FD /* LocationManager.m in Sources */,
-				5C9090C618B3A75500510153 /* LocationTracker.m in Sources */,
 				5C9090A618B3A66A00510153 /* LocationViewController.m in Sources */,
-				5C9090C918B3A78800510153 /* LocationShareModel.m in Sources */,
-				5C9090CC18B3A7FC00510153 /* BackgroundTaskManager.m in Sources */,
 				5C9090A018B3A66A00510153 /* LocationAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

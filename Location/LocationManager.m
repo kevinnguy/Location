@@ -60,6 +60,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
+
     return self;
 }
 
@@ -87,7 +88,8 @@
     NSLog(@"Best location: %@", self.currentLocation.description);
     NSDictionary *json = @{@"lat" : [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude],
                            @"long" : [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude]};
-    
+
+
     
     // Clear unused locations
     [self.locationArray removeAllObjects];
