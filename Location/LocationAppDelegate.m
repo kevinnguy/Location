@@ -8,7 +8,7 @@
 
 #import "LocationAppDelegate.h"
 
-#import "LocationManager.h"
+#import "KCNLocationManager.h"
 
 @import Firebase;
 
@@ -46,7 +46,7 @@
         [alert show];
         
     } else{
-        [[LocationManager sharedManager] startLocationTracking];
+        [[KCNLocationManager sharedManager] startLocationTracking];
         
         //Send the best location to server every 60 seconds
         //You may adjust the time interval depends on the need of your app.
@@ -62,7 +62,7 @@
 }
 
 -(void)postLocation {
-    [[LocationManager sharedManager] uploadCurrentLocation:^(CLLocation *location) {
+    [[KCNLocationManager sharedManager] uploadCurrentLocation:^(CLLocation *location) {
         NSDictionary *json = @{@"lat" : [NSString stringWithFormat:@"%f", location.coordinate.latitude],
                                @"long" : [NSString stringWithFormat:@"%f", location.coordinate.longitude]};
         

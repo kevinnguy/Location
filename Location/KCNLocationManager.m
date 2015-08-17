@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Location. All rights reserved.
 //
 
-#import "LocationManager.h"
+#import "KCNLocationManager.h"
 
 @import CoreLocation;
 
-@interface LocationManager () <CLLocationManagerDelegate>
+@interface KCNLocationManager () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
@@ -30,10 +30,10 @@
 
 NSTimeInterval const kLocationManagerTimerInterval = 60.0f;
 
-@implementation LocationManager
+@implementation KCNLocationManager
 
 + (instancetype)sharedManager {
-    static LocationManager *sharedManager;
+    static KCNLocationManager *sharedManager;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{

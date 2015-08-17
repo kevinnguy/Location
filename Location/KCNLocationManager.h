@@ -10,7 +10,7 @@
 
 @import CoreLocation.CLLocation;
 
-@interface LocationManager : NSObject
+@interface KCNLocationManager : NSObject
 
 + (instancetype)sharedManager;
 
